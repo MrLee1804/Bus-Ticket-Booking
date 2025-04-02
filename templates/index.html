@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - Welcome to Our Bus Ticket Booking System{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+<h1 class="text-center text-primary">Welcome to the Bus Ticket Booking System</h1>
+
+    <p>Book your tickets easily and conveniently.</p>
+    <a href="{{ url_for('register') }}" class="btn btn-primary">Get Started</a>
+
+    <div class="row mt-4">
+        <div class="col-md-4 mb-5">
+            <div class="card">
+                <div class="card-body text-center">
+                    <i class="fas fa-bus fa-3x mb-3"></i>
+                    <h5 class="card-title">Easy Booking</h5>
+                    <p class="card-text">Book your bus tickets in just a few clicks.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-5">
+            <div class="card">
+                <div class="card-body text-center">
+                    <i class="fas fa-user-friends fa-3x mb-3"></i>
+                    <h5 class="card-title">Group Discounts</h5>
+                    <p class="card-text">Enjoy discounts when booking for groups.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-5">
+            <div class="card">
+                <div class="card-body text-center">
+                    <i class="fas fa-clock fa-3x mb-3"></i>
+                    <h5 class="card-title">Real-Time Updates</h5>
+                    <p class="card-text">Get real-time updates on your bookings.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

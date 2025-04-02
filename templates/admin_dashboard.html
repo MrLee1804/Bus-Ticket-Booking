@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+
+{% if password_required %}
+<h2>Enter a password to access the admin dashboard.</h2>
+<div class="password-section my-5">
+    <form method="POST" class="password-form">
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" id="password" name="password" required
+                placeholder="Enter your password">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="#" class="forgot-password">Forgot Password?</a>
+    </form>
+</div>
+
+{% else %}
+<div class="row my-5">
+    <div class="col-md-4 mb-5">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Manage Users</h5>
+                <p class="card-text">View and manage user accounts.</p>
+                <a href="{{ url_for('manage_users') }}" class="btn btn-primary">Go to Manage Users</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-5">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Generate Reports</h5>
+                <p class="card-text">Create and view reports.</p>
+                <a href="{{ url_for('generate_reports') }}" class="btn btn-primary">Go to Generate Reports</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-5">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">View Bookings</h5>
+                <p class="card-text">View all bookings made by users.</p>
+                <a href="{{ url_for('view_bookings') }}" class="btn btn-primary">Go to View Bookings</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-5">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Contact Us</h5>
+                <p class="card-text">Get in touch with us for any inquiries.</p>
+                <a href="{{ url_for('contact_us') }}" class="btn btn-primary">Go to Contact Us</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-5">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Help & Support</h5>
+                <p class="card-text">Access help and support resources.</p>
+                <a href="{{ url_for('help_support') }}" class="btn btn-primary">Go to Help & Support</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Your Bookings - Manage Your Reservations{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h2 class="text-center text-primary">Your Bookings</h2>
+    <p class="text-success">{{ success_message }}</p>
+    <p class="text-danger">{{ error_message }}</p>
+    <form method="POST" action="{{ url_for('cancel_booking') }}">
+
+
+
+        {% if bookings %}
+        <div class="row">
+            {% for booking in bookings %}
+            <div class="col-md-4 mb-5">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Booking ID: {{ booking[0] }}</h5>
+                        <p class="card-text">Bus Stop: {{ booking[1] }}</p>
+                        <p class="card-text">Destination: {{ booking[2] }}</p>
+                        <p class="card-text">Ticket Type: {{ booking[3] }}</p>
+                        <p class="card-text">Quantity: {{ booking[4] }}</p>
+                        <p class="card-text">Total Price: {{ booking[5] }}</p>
+                        <img src="{{ url_for('static', filename='qr_codes/booking_' ~ loop.index ~ '.png') }}"
+                            alt="QR Code" class="img-fluid mt-2">
+                        <input type="hidden" name="booking_id" value="{{ booking[0] }}">
+                        <button type="submit" class="btn btn-danger form-control mt-2">Cancel Booking</button>
+                    </div>
+                </div>
+            </div>
+
+            {% endfor %}
+        </div>
+    </form>
+    {% else %}
+    <p>No bookings available.</p>
+    {% endif %}
+</div>
+{% endblock %}

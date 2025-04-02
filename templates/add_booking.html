@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Booking - Create Your Reservation{% endblock %}
+
+{% block content %}
+    <div class="container my-5">
+        <h2>Add a New Booking</h2>
+        <form method="POST" action="/process_payment">
+
+            <div class="form-group">
+                <label for="busStop">Select Bus Stop</label>
+                <select class="form-control" id="busStop" name="busStop" required>
+                    <option value="">Select a bus stop</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="destination">Select Destination</label>
+                <select class="form-control" id="destination" name="destination" required>
+                    <option value="">Select a destination</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="ticketType">Ticket Type</label>
+                <select class="form-control" id="ticketType" name="ticketType" required>
+                    <option value="">Select a ticket type</option>
+                    <option name="Business">Business</option>
+                    <option name="Economy">Economy</option>
+                    <option name="Premium">Premium</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="quantity">Quantity</label>
+                <input type="number" class="form-control" id="quantity" name="quantity" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Process to Pay</button>
+
+        </form>
+    </div>
+
+    <script>
+        fetch('/static/locations.json')
+            .then(response => response.json())
+            .then(data => {
+                const busStopSelect = document.getElementById('busStop');
+                const destinationSelect = document.getElementById('destination');
+
+                data.bus_stops.forEach(busStop => {
+                    const option = document.createElement('option');
+                    option.value = busStop;
+                    option.textContent = busStop;
+                    busStopSelect.appendChild(option);
+                });
+
+                data.destinations.forEach(destination => {
+                    const option = document.createElement('option');
+                    option.value = destination;
+                    option.textContent = destination;
+                    destinationSelect.appendChild(option);
+                });
+                
+            })
+            .catch(error => console.error('Error fetching locations:', error));
+    </script>
+{% endblock %}

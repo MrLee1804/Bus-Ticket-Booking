@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Your Ticket{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="card">
+        <div class="card-header text-center">
+            <h2>Your Ticket</h2>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>Bus Stop:</strong> {{ bus_stop }}</p>
+                    <p><strong>Destination:</strong> {{ destination }}</p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Ticket Type:</strong> {{ ticket_type }}</p>
+                    <p><strong>Quantity:</strong> {{ quantity }}</p>
+                    <p><strong>Total Price:</strong> {{ total }}</p>
+                </div>
+            </div>
+            <div class="qr-code text-center mt-4">
+                <img src="{{ qr_code_path }}" alt="QR Code" class="img-fluid">
+            </div>
+        </div>
+        <div class="card-footer text-center">
+            <a href="{{ url_for('view_bookings') }}" class="btn btn-secondary">Back to View Bookings</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

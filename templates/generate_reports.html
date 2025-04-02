@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Generate Reports{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center">Generate Reports</h2>
+    <p>This is where you can generate reports on bookings and users.</p>
+    
+    <h4>Bookings Report</h4>
+    <form method="POST" action="{{ url_for('generate_bookings_report') }}">
+        <button type="submit" class="btn btn-primary">Generate Bookings Report</button>
+    </form>
+
+    <h4>Users Report</h4>
+    <form method="POST" action="{{ url_for('generate_users_report') }}">
+        <button type="submit" class="btn btn-primary">Generate Users Report</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile Settings - Manage Your Account{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h2 class="text-center text-primary">Profile Settings</h2>
+
+    <div class="card mb-4 border-success">
+        <div class="card-body">
+            <h3 class="mt-5 text-center">Profile Photo</h3>
+
+            {% if profile_photo %}
+            <img src="{{ profile_photo }}" alt="Profile Photo" class="img-thumbnail mb-3"
+                style="width: 150px; height: 150px;">
+            {% else %}
+            <p>No profile photo uploaded.</p>
+            {% endif %}
+            <form method="POST" action="{{ url_for('update_profile') }}" enctype="multipart/form-data" class="mb-4">
+
+                <div class="form-group">
+                    <label for="profile_photo">Upload New Photo</label>
+                    <input type="file" class="form-control" id="profile_photo" name="profile_photo">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" value="{{ session['user'] }}"
+                        required>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" value="{{ session['email'] }}"
+                        required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Update Profile</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="card mb-5">
+        <div class="card-body">
+            <h3 class="mt-5 text-center text-success">Your Bookings</h3>
+
+            <div class="table-responsive">
+                <table class="table table-striped">
+
+                <thead>
+                    <tr>
+                        <th>Booking ID</th>
+                        <th>Bus Stop</th>
+                        <th>Destination</th>
+                        <th>Ticket Type</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for booking in bookings %}
+                    <tr>
+                        <td>{{ booking[0] }}</td>
+                        <td>{{ booking[1] }}</td>
+                        <td>{{ booking[2] }}</td>
+                        <td>{{ booking[3] }}</td>
+                        <td>{{ booking[4] }}</td>
+                        <td>{{ booking[5] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <h3 class="mt-5 text-center text-success">User Statistics</h3>
+            <p>Total Bookings: {{ bookings|length }}</p>
+            <p>Total Amount Spent: {{ total_spent }}</p>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{{ url_for('change_password') }}" class="btn btn-primary">Update Password</a>
+        <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
+        <form method="POST" action="{{ url_for('delete_account') }}" class="d-inline"
+            onsubmit="return confirm('Are you sure you want to delete your account?');">
+            <button type="submit" class="btn btn-danger">Delete Account</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

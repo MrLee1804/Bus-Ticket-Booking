@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %}Payment Page{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+
+    <div class="card mb-5">
+        <div class="card-header">
+            <h1>Your Order Summary</h1>
+        </div>
+        <div class="card-body">
+            <p>Bus Stop : {{ bus_stop }}</p>
+            <p>Destination : {{ destination }}</p>
+            <p>Ticket Type : {{ ticket_type }}</p>
+            <p>Quantity : {{ quantity }}</p>
+            <p>Total Price : {{ total }}</p>
+        </div>
+    </div>
+
+    <h2>Payment Options</h2>
+    <form method="POST" action="/confirm_payment">
+        <div class="form-group my-4"></div>
+            <label for="paymentMethod">Select Payment Method</label>
+            <select class="form-control" id="paymentMethod" name="paymentMethod" required>
+                <option value="">Select a payment method</option>
+                <option value="upi">UPI</option>
+                <option value="paypal">PayPal</option>
+                <option value="debit_card">Debit Card</option>
+            </select>
+        </div>
+
+        <div class="form-group" id="debitCardFields" style="display:none;">
+            <label for="cardNumber">Card Number</label>
+            <input type="text" class="form-control" id="cardNumber" name="cardNumber">
+            <label for="expiryDate">Expiry Date</label>
+            <input type="text" class="form-control" id="expiryDate" name="expiryDate">
+            <label for="cvv">CVV</label>
+            <input type="text" class="form-control" id="cvv" name="cvv">
+        </div>
+
+
+
+        <div class="form-group text-center" id="paypalQRCode" style="display:none;">
+            <div class="table-responsive">
+                <img src="{{ url_for('static', filename='qr_code.png') }}" alt="PayPal QR Code">
+            </div>
+            <hr>
+            <label>Scan the QR Code for PayPal Payment</label>
+        </div>
+
+        <div class="form-group text-center" id="upiQRCode" style="display:none;">
+            <div class="table-responsive">
+                <img src="{{ url_for('static', filename='qr_code.png') }}" alt="UPI QR Code">
+            </div>
+            <hr>
+            <label>Scan the QR Code for UPI Payment</label>
+        </div>
+
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary form-control">Pay Now</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    // Set the amount field with the total amount passed from the previous page
+    document.getElementById('amount').value = "{{ total }}";
+</script>
+<script>
+    document.getElementById('paymentMethod').addEventListener('change', function () {
+        var selectedMethod = this.value;
+        document.getElementById('debitCardFields').style.display = selectedMethod === 'debit_card' ? 'block' : 'none';
+        document.getElementById('upiQRCode').style.display = selectedMethod === 'upi' ? 'block' : 'none';
+        document.getElementById('paypalQRCode').style.display = selectedMethod === 'paypal' ? 'block' : 'none';
+    });
+</script>
+{% endblock %}
