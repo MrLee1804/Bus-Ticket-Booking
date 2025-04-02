@@ -1,0 +1,35 @@
+.ticket-details {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    color: #333; /* Updated text color for better readability */
+}
+
+.card {
+    border: 1px solid #007bff;
+    border-radius: 8px; /* Added border radius for a softer look */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Added shadow for depth */
+}
+
+.card-header {
+    background-color: #0056b3; /* Darkened header color for better contrast */
+    color: white;
+    font-weight: bold; /* Increased font weight for emphasis */
+}
+
+.card-footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #007bff; /* Added border to footer for separation */
+}
+
+.btn {
+    border-radius: 5px; /* Added border radius to buttons */
+}
+
+.btn-primary {
+    background-color: #007bff; /* Primary button color */
+    border: none; /* Removed border */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
